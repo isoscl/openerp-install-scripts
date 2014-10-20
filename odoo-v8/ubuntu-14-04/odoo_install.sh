@@ -196,7 +196,7 @@ USER CAN CHOOSE YES OR NO:
 #it installed.
 wkhtmltoPdf='True'
 
-if [[ $wkhtmltoPdf = "True" ]]; then
+if [ $wkhtmltoPdf = "True" ]; then
 echo -e "\n---- Install WkHtmlToPdf 0.12.1 ----"
 sudo wget -P Downloads http://sourceforge.net/projects/wkhtmltopdf/files/0.$
 cd Downloads
