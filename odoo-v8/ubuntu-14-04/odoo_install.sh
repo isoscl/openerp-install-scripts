@@ -55,7 +55,7 @@ echo -e "\n---- Install tool packages ----"
 sudo apt-get install wget subversion git bzr bzrtools python-pip -y
 	
 echo -e "\n---- Install python packages ----"
-sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-decorator python-requests python-passlib python-pil -y
+sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-decorator python-requests python-passlib python-pil python-gevent -y
 	
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
@@ -179,6 +179,35 @@ sudo chown root: /etc/init.d/$OE_CONFIG
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
+
+#--------------------------------------------------
+#Adding WKHTMLTOPDF
+#--------------------------------------------------
+echo -e "\n---- Install WkHtmlToPdf 0.12.1 ----"
+sudo wget -P Downloads http://sourceforge.net/projects/wkhtmltopdf/files/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+cd Downloads
+sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
+cd /usr/local/bin
+sudo cp wkhtmltoimage /usr/bin/wkhtmltoimage
+sudo cp wkhtmltopdf /usr/bin/wkhtmltopdf
+
+USER CAN CHOOSE YES OR NO:
+#Set this to True if you want to install Wkhtmlopdf. False if you do not want
+#it installed.
+wkhtmltoPdf='True'
+
+if [[ $wkhtmltoPdf = "True" ]]; then
+echo -e "\n---- Install WkHtmlToPdf 0.12.1 ----"
+sudo wget -P Downloads http://sourceforge.net/projects/wkhtmltopdf/files/0.$
+cd Downloads
+sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
+cd /usr/local/bin
+sudo cp wkhtmltoimage /usr/bin/wkhtmltoimage
+sudo cp wkhtmltopdf /usr/bin/wkhtmltopdf
+echo -e "Starting up Odoo!"
+else
+echo -e "\n---- User doesn't want WkHtmlToPdf ----"
+fi;
  
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 
